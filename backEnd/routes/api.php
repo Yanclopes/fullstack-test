@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\locations\CityController;
+use App\Http\Controllers\locations\StateController;
+use App\Http\Controllers\weather\WeatherByIPController;
+use App\Http\Controllers\weather\WeatherController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/states', [StateController::class, 'getStates']);
+Route::get('/cities/{state}', [CityController::class, 'getCities']);
+
+
+Route::get('/weather/{city}', [WeatherController::class, 'getWeather']);
+Route::get('/ip/weather', [WeatherByIPController::class, 'getWeatherByIP']);
+

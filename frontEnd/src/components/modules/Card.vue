@@ -1,14 +1,7 @@
 <script>
-  import Ensolarado from './icons/Ensolarado.vue'
-  import Nublado from './icons/Nublado.vue'
-  import Chuvoso from './icons/Chuvoso.vue'
   export default {
     name : 'Card',
-    components: {
-      Ensolarado,
-      Nublado,
-      Chuvoso
-    },
+
     data() {
       return {
         climate: '',

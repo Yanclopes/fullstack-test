@@ -1,7 +1,7 @@
 import {http} from './index.js'
-async function getStates() {
+export async function getStates() {
     try {
-        const resposta = await instance.get('/estados');
+        const resposta = await http.get('/states');
         return resposta.data
     } catch (erro) {
         return

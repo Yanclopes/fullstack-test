@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
-import {getStates} from '../../services/GetStates.js'
+import {getStates} from '@/services/GetStates.js'
+import {getCities} from '@/services/GetCities.js'
 
 const states = ref([]);
 const cities = ref([]);
@@ -18,7 +19,7 @@ async function loadCities(state) {
 loadStates();
 
 async function changeState(event){
-  loadCities(event.target.value)
+  await loadCities(event.target.value)
 }
 
 async function changeCitie(event){
@@ -30,13 +31,13 @@ async function changeCitie(event){
   <div>
     <div>
       <select @change="changeState">
-        <option v-for="state in states" :key="state.id" :value="state.name">{{ state.name }}</option>
+        <option v-for="state in states" :key="state.id" :value="state.id">{{ state.name }}</option>
       </select>
     </div>
     <div>
       <div v-if="loading">Carregando...</div>
       <select v-else @change="changeCitie">
-        <option v-for="city in cities" :key="city.id" :value="city.name">{{ city.name }}</option>
+        <option v-for="city in cities" :key="city.id" :value="state.id">{{ city.name }}</option>
       </select>
     </div>
   </div>
