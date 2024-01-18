@@ -1,29 +1,42 @@
-<script setup>
-import { ref } from 'vue';
+<script>
 import {getStates} from '@/services/GetStates.js'
 import {getCities} from '@/services/GetCities.js'
 
-const states = ref([]);
-const cities = ref([]);
-const loading = ref(false);
+export default {
+  data() {
+    return {
+      states: [],
+      cities: [],
+      loading: false,
+      stateSelected: false,
+      citySelected: false,
+    }
+  },
+  methods: {
+    async loadStates() {
+      this.states = await getStates();
+    },
 
-async function loadStates() {
-  states.value = await getStates();
-}
+    async loadCities(state) {
+      this.loading = true;
+      this.cities = await getCities(state);
+      this.loading = false;
+    },
 
-async function loadCities(state) {
-  loading.value = true;
-  cities.value = await getCities(state);
-  loading.value = false;
-}
-loadStates();
+    async changeState(event){
+      this.stateSelected = true
+      await this.loadCities(event.target.value)
+    },
 
-async function changeState(event){
-  await loadCities(event.target.value)
-}
+    async changeCitie(event){
+      this.citySelected=  true
+      this.$emit('option-selected', event.target.value);
+    },
+  },
 
-async function changeCitie(event){
-  this.$emit('option-selected', event.target.value);
+  created() {
+    this.loadStates()
+  }
 }
 </script>
 
@@ -31,13 +44,15 @@ async function changeCitie(event){
   <div class="select-div">
     <div>
       <select @change="changeState">
+        <option selected v-if="!stateSelected">selecione o estado</option>
         <option v-for="state in states" :key="state.id" :value="state.id">{{ state.nome }}</option>
       </select>
     </div>
     <div>
       <div v-if="loading">Carregando...</div>
       <select v-else @change="changeCitie">
-        <option v-for="city in cities" :key="city.id" :value="city.id">{{ city.nome }}</option>
+        <option selected v-if="!citySelected">selecione a cidade</option>
+        <option v-for="city in cities" :key="city.id" :value="city.nome">{{ city.nome }}</option>
       </select>
     </div>
   </div>

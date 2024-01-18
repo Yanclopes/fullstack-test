@@ -7,21 +7,23 @@ export default {
   components: { Select, Card },
   data() {
     return {
-      selectedOption: 'Bahia'
+      ip : true,
+      selectedOption: ''
     }
   },
   methods: {
     handleOptionSelected(option) {
+      this.ip = false
       this.selectedOption = option;
     }
-  }
+  },
 }
 </script>
 
 <template>
   <div>
     <Select @option-selected="handleOptionSelected" />
-    <Card :selectedOption="selectedOption"/>
+    <Card :ip="ip" :selectedOption="selectedOption"/>
   </div>
 </template>
 

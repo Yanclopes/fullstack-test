@@ -5,5 +5,5 @@ $routes = [
     '/cities/{id}' => 'CityController@getCities',
 
     '/ip/weather' => 'WeatherByIpController@getWeatherByIp',
-    '/weather/{id}' => 'WeatherController@getWeather',
+    '/weather' => 'WeatherController@getWeather',
 ];
