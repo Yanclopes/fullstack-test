@@ -15,12 +15,9 @@
         isLoading: true,
         weather: Array,
         background:{
-          2:'',
-          3:'',
-          5:'',
-          6:'',
-          7:'',
-          8:'',
+          dia: '/src/assets/images/dia.svg',
+          noite: '/src/assets/images/noite.svg',
+          nublado: '/src/assets/images/nublado.svg',
         }
       }
     },
@@ -46,9 +43,9 @@
   <div class="card">
     <div class="card-div load" v-if="isLoading"><div class="loader"></div></div>
     <div class="card-div" v-else>
-      <div class="weather" :style="`background-image: url(${background[Number(weather.weather[0].id.toString().charAt(0))]}); background-position: center; background-size: cover;`">
+      <div class="weather" :style="`background-image: url(${weather.dt >= 360 && weather.dt < 1080 ?  (weather.weather[0].id !== 800 ? background.nublado : background.dia) : background.noite}); background-position: center`">
         <img :src="`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`" alt="icone"/>
-        <h2>{{weather.main.temp}}°C</h2>
+        <h2>{{weather.main.temp.toFixed(0)}}°C</h2>
         <h3>{{weather.weather[0].description}}</h3>
       </div>
       <div class="d-flex date">
@@ -62,7 +59,7 @@
         <div class="d-flex">
           <icon-wind/>
           <div class="span">
-            <span>{{(weather.wind.speed * 3.6).toFixed(2)}} km/h</span>
+            <span>{{(weather.wind.speed * 3.6).toFixed(0)}} km/h</span>
             <span>Veloc. Vento</span>
           </div>
         </div>
@@ -83,13 +80,13 @@
     text-align: center;
   }
   .card-div{
-    width: 290px;
+    width: 270px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
   .weather{
-    border-radius: 12px 12px 0 0;
+    border-radius: 16px 16px 0 0;
     background: white;
   }
   .weather,.date{
@@ -104,7 +101,7 @@
   }
   .date{
     background: aliceblue;
-    border-radius: 0 0 12px 12px;
+    border-radius: 0 0 16px 16px;
   }
   .weather img{
     width: 100px;

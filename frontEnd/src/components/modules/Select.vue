@@ -29,7 +29,7 @@ export default {
     },
 
     async changeCitie(event){
-      this.citySelected=  true
+      this.citySelected =  true
       this.$emit('option-selected', event.target.value);
     },
   },
@@ -44,14 +44,14 @@ export default {
   <div class="select-div">
     <div>
       <select @change="changeState">
-        <option selected v-if="!stateSelected">selecione o estado</option>
+        <option selected v-if="!stateSelected">Selecione o estado</option>
         <option v-for="state in states" :key="state.id" :value="state.id">{{ state.nome }}</option>
       </select>
     </div>
     <div>
-      <div v-if="loading">Carregando...</div>
+      <div v-if="loading" class="load">Carregando...</div>
       <select v-else @change="changeCitie">
-        <option selected v-if="!citySelected">selecione a cidade</option>
+        <option selected v-if="!citySelected">Selecione a cidade</option>
         <option v-for="city in cities" :key="city.id" :value="city.nome">{{ city.nome }}</option>
       </select>
     </div>
@@ -59,12 +59,19 @@ export default {
 </template>
 
 <style scoped>
+  .load{
+    text-align: center;
+    color: white;
+  }
   select{
     width: 100%;
+    border: none;
+    border-radius: 1rem;
+    font-size: 1rem;
+    padding: 0.4rem 0.5rem;
   }
   .select-div div{
-    width: 300px
-
+    width: 270px
   }
   .select-div{
     display: flex;

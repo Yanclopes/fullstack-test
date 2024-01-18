@@ -21,7 +21,7 @@ class WeatherService
      */
     public function getWeatherfromAPI($city)
     {
-        $location = $this->getLocationFromAPI($city)[0];
+        $location = $this->getBrazilCity($this->getLocationFromAPI($city));
         return Http::get($this->baseUrl.'/data/2.5/weather?lat='.$location['lat'].'&lon='.$location['lon'].'&appid='.$this->apiKey.'&units=metric&lang=pt_br');
     }
 
@@ -31,5 +31,15 @@ class WeatherService
     private function getLocationFromAPI($city)
     {
         return Http::get($this->baseUrl.'/geo/1.0/direct?q='.urlencode($city).'&appid='.$this->apiKey);
+    }
+
+    private function getBrazilCity($data)
+    {
+        foreach ($data as $item) {
+            if ($item["country"] === "BR") {
+                return $item;
+            }
+        }
+        return $data[0];
     }
 }
