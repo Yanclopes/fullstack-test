@@ -2,6 +2,7 @@
 
 namespace App\Service\Location;
 
+use App\Utils\Http;
 use Exception;
 
 class IbgeService
@@ -18,37 +19,14 @@ class IbgeService
      */
     public function getIbgeStates()
     {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, ($this->baseUrl.'/estados'));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $response = curl_exec($ch);
-
-        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-        curl_close($ch);
-
-        if ($httpcode >= 200 && $httpcode < 300) {
-            return json_decode($response, true);
-        } else {
-            throw new Exception('Falha ao buscar os estados');
-        }
+        return Http::get($this->baseUrl.'/estados');
     }
 
+    /**
+     * @throws Exception
+     */
     public function getIbgeCities($state)
     {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, ($this->baseUrl."/estados/{$state[0]}/municipios"));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $response = curl_exec($ch);
-
-        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-        curl_close($ch);
-
-        if ($httpcode >= 200 && $httpcode < 300) {
-            return json_decode($response, true);
-        } else {
-            throw new Exception('Falha ao buscar as cidades');
-        }
+        return Http::get($this->baseUrl."/estados/{$state[0]}/municipios");
     }
 }
