@@ -22,7 +22,7 @@ class WeatherService
     public function getWeatherfromAPI($city)
     {
         $location = $this->getLocationFromAPI($city)[0];
-        return Http::get($this->baseUrl.'/data/2.5/weather?lat='.$location['lat'].'&lon='.$location['lon'].'&appid='.$this->apiKey.'&units=metric');
+        return Http::get($this->baseUrl.'/data/2.5/weather?lat='.$location['lat'].'&lon='.$location['lon'].'&appid='.$this->apiKey.'&units=metric&lang=pt_br');
     }
 
     /**

@@ -1,8 +1,11 @@
 <script>
   import {getWeatherByIp} from '@/services/GetWeatherByIp.js'
   import {getWeather} from '@/services/GetWeather.js'
+  import IconWind from "@/components/icons/IconWind.vue";
+  import IconHumidity from "@/components/icons/IconHumidity.vue";
   export default {
     name : 'Card',
+    components: {IconHumidity, IconWind},
     props:{
       ip: Boolean,
       selectedOption: String,
@@ -11,6 +14,14 @@
       return {
         isLoading: true,
         weather: Array,
+        background:{
+          2:'',
+          3:'',
+          5:'',
+          6:'',
+          7:'',
+          8:'',
+        }
       }
     },
     methods: {
@@ -32,26 +43,26 @@
 </script>
 
 <template>
-  <div>
-    <div v-if="isLoading">carregando...</div>
-    <div v-else>
-      <div>
+  <div class="card">
+    <div class="card-div load" v-if="isLoading"><div class="loader"></div></div>
+    <div class="card-div" v-else>
+      <div class="weather" :style="`background-image: url(${background[Number(weather.weather[0].id.toString().charAt(0))]}); background-position: center; background-size: cover;`">
         <img :src="`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`" alt="icone"/>
         <h2>{{weather.main.temp}}°C</h2>
-        <h3>{{weather.weather[0].main}}</h3>
+        <h3>{{weather.weather[0].description}}</h3>
       </div>
-      <div>
-        <div>
-
-          <div>
+      <div class="d-flex date">
+        <div class="d-flex">
+          <icon-humidity/>
+          <div class="span">
             <span>{{weather.main.humidity}}%</span>
             <span>Umidade</span>
           </div>
         </div>
-        <div>
-
-          <div>
-            <span>{{(weather.wind.speed * 3.6).toFixed(2)}}km/h</span>
+        <div class="d-flex">
+          <icon-wind/>
+          <div class="span">
+            <span>{{(weather.wind.speed * 3.6).toFixed(2)}} km/h</span>
             <span>Veloc. Vento</span>
           </div>
         </div>
@@ -61,5 +72,63 @@
 </template>
 
 <style scoped>
+  h2{
+    font-size: 2.5rem;
+    margin: 1rem auto;
+  }
+  .card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .card-div{
+    width: 290px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .weather{
+    border-radius: 12px 12px 0 0;
+    background: white;
+  }
+  .weather,.date{
+    padding: 1.5rem 1rem;
+  }
+  .span{
+    display: flex;
+    flex-direction: column;
+  }
+  span{
+    font-size: 1rem;
+  }
+  .date{
+    background: aliceblue;
+    border-radius: 0 0 12px 12px;
+  }
+  .weather img{
+    width: 100px;
+  }
+  .d-flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .load{
+    align-items: center;
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 
+  .loader {
+    border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 8px solid #3498db;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+  }
 </style>

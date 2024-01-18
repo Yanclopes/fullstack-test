@@ -21,12 +21,18 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div class="app">
     <Select @option-selected="handleOptionSelected" />
     <Card :ip="ip" :selectedOption="selectedOption"/>
   </div>
 </template>
 
 <style scoped>
-
+  .app{
+    height: 80vh;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+  }
 </style>
