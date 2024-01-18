@@ -28,20 +28,34 @@ async function changeCitie(event){
 </script>
 
 <template>
-  <div>
+  <div class="select-div">
     <div>
       <select @change="changeState">
-        <option v-for="state in states" :key="state.id" :value="state.id">{{ state.name }}</option>
+        <option v-for="state in states" :key="state.id" :value="state.id">{{ state.nome }}</option>
       </select>
     </div>
     <div>
       <div v-if="loading">Carregando...</div>
       <select v-else @change="changeCitie">
-        <option v-for="city in cities" :key="city.id" :value="state.id">{{ city.name }}</option>
+        <option v-for="city in cities" :key="city.id" :value="city.id">{{ city.nome }}</option>
       </select>
     </div>
   </div>
 </template>
 
 <style scoped>
+  select{
+    width: 100%;
+  }
+  .select-div div{
+    width: 300px
+
+  }
+  .select-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+  }
 </style>
