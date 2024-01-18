@@ -7,7 +7,7 @@ export default {
   components: { Select, Card },
   data() {
     return {
-      selectedOption: String
+      selectedOption: 'Bahia'
     }
   },
   methods: {
@@ -21,7 +21,7 @@ export default {
 <template>
   <div>
     <Select @option-selected="handleOptionSelected" />
-    <!--<Card :selectedOption="selectedOption"/>-->
+    <Card :selectedOption="selectedOption"/>
   </div>
 </template>
 
