@@ -15,9 +15,9 @@
         isLoading: true,
         weather: Array,
         background:{
-          dia: '/src/assets/images/dia.svg',
-          noite: '/src/assets/images/noite.svg',
-          nublado: '/src/assets/images/nublado.svg',
+          dia: '/images/dia.svg',
+          noite: '/images/noite.svg',
+          nublado: '/images/nublado.svg',
         }
       }
     },
