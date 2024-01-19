@@ -10,4 +10,4 @@ services:
     ports:
       - 8080:80
     environment:
-      - VIRTUAL_HOST=localhost
+      - APP_ENV=prod

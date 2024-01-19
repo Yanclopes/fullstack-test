@@ -26,6 +26,10 @@
         this.isLoading = true
         this.weather = this.ip ? await getWeatherByIp() : await getWeather(this.selectedOption)
         this.isLoading = false
+      },
+      unixToMinutes: function (unixTimestamp) {
+        const date = new Date(unixTimestamp * 1000);
+        return date.getHours() * 60 + date.getMinutes();
       }
     },
     created() {
@@ -43,7 +47,7 @@
   <div class="card">
     <div class="card-div load" v-if="isLoading"><div class="loader"></div></div>
     <div class="card-div" v-else>
-      <div class="weather" :style="`background-image: url(${weather.dt >= 360 && weather.dt < 1080 ?  (weather.weather[0].id !== 800 ? background.nublado : background.dia) : background.noite}); background-position: center`">
+      <div class="weather" :style="`background-image: url(${unixToMinutes(weather.dt) >= 360 && unixToMinutes(weather.dt) < 1080 ?  (weather.weather[0].id !== 800 ? background.nublado : background.dia) : background.noite}); background-position: center`">
         <img :src="`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`" alt="icone"/>
         <h2>{{weather.main.temp.toFixed(0)}}°C</h2>
         <h3>{{weather.weather[0].description}}</h3>
