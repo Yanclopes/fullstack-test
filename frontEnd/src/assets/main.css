@@ -5,3 +5,9 @@
 body{
    background: #1d1d1d;
 }
+
+.text{
+   text-align: center;
+   color: white;
+   font-size: 1.8rem;
+}

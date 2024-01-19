@@ -14,13 +14,23 @@ export default {
   },
   methods: {
     async loadStates() {
-      this.states = await getStates();
+      try {
+        this.states = await getStates();
+      } catch (error) {
+        this.states = error
+      }
     },
 
     async loadCities(state) {
       this.loading = true;
-      this.cities = await getCities(state);
-      this.loading = false;
+
+      try {
+        this.cities = await getCities(state);
+      } catch (error) {
+        this.cities = error
+      } finally {
+        this.loading = false;
+      }
     },
 
     async changeState(event){
@@ -43,13 +53,15 @@ export default {
 <template>
   <div class="select-div">
     <div>
-      <select @change="changeState">
+      <div v-if="states.error" class="text">{{states.message}}</div>
+      <select v-else @change="changeState">
         <option selected v-if="!stateSelected">Selecione o estado</option>
         <option v-for="state in states" :key="state.id" :value="state.id">{{ state.nome }}</option>
       </select>
     </div>
     <div>
       <div v-if="loading" class="load">Carregando...</div>
+      <div v-else-if="cities.error" class="text">{{cities.message}}</div>
       <select v-else @change="changeCitie">
         <option selected v-if="!citySelected">Selecione a cidade</option>
         <option v-for="city in cities" :key="city.id" :value="city.nome">{{ city.nome }}</option>

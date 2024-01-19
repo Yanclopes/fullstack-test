@@ -24,8 +24,13 @@
     methods: {
       async setWeather() {
         this.isLoading = true
-        this.weather = this.ip ? await getWeatherByIp() : await getWeather(this.selectedOption)
-        this.isLoading = false
+        try {
+          this.weather = this.ip ? await getWeatherByIp() : await getWeather(this.selectedOption)
+        } catch (error){
+          this.weather = error
+        } finally {
+          this.isLoading = false
+        }
       },
       unixToMinutes: function (unixTimestamp) {
         const date = new Date(unixTimestamp * 1000);
@@ -46,6 +51,7 @@
 <template>
   <div class="card">
     <div class="card-div load" v-if="isLoading"><div class="loader"></div></div>
+    <div v-else-if="weather.error" class="text">{{weather.ip ? 'Selecione uma cidade' : weather.message}}</div>
     <div class="card-div" v-else>
       <div class="weather" :style="`background-image: url(${unixToMinutes(weather.dt) >= 360 && unixToMinutes(weather.dt) < 1080 ?  (weather.weather[0].id !== 800 ? background.nublado : background.dia) : background.noite}); background-position: center`">
         <img :src="`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`" alt="icone"/>

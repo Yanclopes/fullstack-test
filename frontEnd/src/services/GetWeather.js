@@ -1,10 +1,16 @@
 import {http} from './index.js'
 export async function getWeather(city) {
-    try {
-        const resposta = await http.get(`/weather?city=${city}`);
-        console.log(resposta)
-        return resposta.data
-    } catch (erro) {
-
-    }
+    return http.get(`/weather/${city}`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            if (error.response) {
+                return { error: true, message: 'Erro de resposta do servidor' };
+            } else if (error.request) {
+                return { error: true, message: 'Sem resposta do servidor' };
+            } else {
+                return { error: true, message: 'Erro ao configurar a requisição' };
+            }
+        });
 }
