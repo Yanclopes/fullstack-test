@@ -55,7 +55,7 @@ cd frontEnd
 (Get-Content .env) -replace 'VITE_APP_BASE_URL=http://localhost:8080', 'VITE_APP_BASE_URL=http://18.222.108.134:8080' | Set-Content .env
 ```
 
-### Trocar voltar para ambiente Local
+### Trocar para ambiente Local
 ```sh
 cd frontEnd
 ```
