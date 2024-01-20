@@ -12,7 +12,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN a2enmod rewrite
 
 ENV APACHE_DOCUMENT_ROOT /var/www/html
-RUN echo "ServerName  172.31.11.217" >> /etc/apache2/apache2.conf
+RUN echo "ServerName  18.117.187.5" >> /etc/apache2/apache2.conf
 COPY . ${APACHE_DOCUMENT_ROOT}
 
 RUN composer install --no-dev --optimize-autoloader
