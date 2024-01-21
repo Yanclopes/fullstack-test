@@ -5,7 +5,13 @@ RUN apt-get update && apt-get install -y \
     zlib1g-dev \
     libzip-dev \
     libicu-dev \
-    g++
+    g++ \
+
+RUN apt-get install -y certbot
+
+docker run -it --rm --name certbot \
+  -v certbot_data:/etc/letsencrypt \
+  certbot/certbot certonly --standalone -d previsaotempo.online
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
