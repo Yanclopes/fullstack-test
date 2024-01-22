@@ -52,7 +52,7 @@ Caso não abra de maneira correta verifique onde esta sendo executado o npm run 
 cd frontEnd
 ```
 ```sh
-(Get-Content .env) -replace 'VITE_APP_BASE_URL=http://localhost:8080', 'VITE_APP_BASE_URL=http://18.117.187.5:8080' | Set-Content .env
+(Get-Content .env) -replace 'VITE_APP_BASE_URL=http://localhost:8080', 'VITE_APP_BASE_URL=http://previsaotempo.online' | Set-Content .env
 ```
 
 ### Trocar para ambiente Local
@@ -60,5 +60,5 @@ cd frontEnd
 cd frontEnd
 ```
 ```sh
-(Get-Content .env) -replace 'VITE_APP_BASE_URL=http://18.117.187.5:8080', 'VITE_APP_BASE_URL=http://localhost:8080' | Set-Content .env
+(Get-Content .env) -replace 'VITE_APP_BASE_URL=http://previsaotempo.online', 'VITE_APP_BASE_URL=http://localhost:8080' | Set-Content .env
 ```
