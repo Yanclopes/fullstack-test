@@ -123,6 +123,9 @@
     gap: 0.4rem;
   }
   .load{
+    height: 388px;
+    display: flex;
+    justify-content: center;
     align-items: center;
   }
   @keyframes spin {

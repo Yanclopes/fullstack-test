@@ -53,7 +53,7 @@ export default {
 <template>
   <div class="select-div">
     <div>
-      <div v-if="states.error" class="text">{{states.message}}</div>
+      <div v-if="states.error" class="text">{{ states.message }}</div>
       <select v-else @change="changeState">
         <option selected v-if="!stateSelected">Selecione o estado</option>
         <option v-for="state in states" :key="state.id" :value="state.id">{{ state.nome }}</option>
@@ -61,7 +61,7 @@ export default {
     </div>
     <div>
       <div v-if="loading" class="load">Carregando...</div>
-      <div v-else-if="cities.error" class="text">{{cities.message}}</div>
+      <div v-else-if="cities.error" class="text">{{ cities.message }}</div>
       <select v-else @change="changeCitie">
         <option selected v-if="!citySelected">Selecione a cidade</option>
         <option v-for="city in cities" :key="city.id" :value="city.nome">{{ city.nome }}</option>
