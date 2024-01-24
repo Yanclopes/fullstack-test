@@ -13,11 +13,17 @@ Para executar o projeto localmente, é necessário ter as seguintes ferramentas 
 - [Node.js](https://nodejs.org/en)
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/)
+- [Composer](https://getcomposer.org/)
 
 ## Backend
 ```sh
 cd backEnd
 ```
+### Configuração do composer
+```sh
+composer install
+```
+
 ### Configuração do Backend
 Certifique-se de que o Docker esteja em execução e execute o seguinte comando:
 ```sh
@@ -50,18 +56,6 @@ Se a página não abrir corretamente, verifique onde o comando `npm run dev` est
 ## Documentação da API
 
 - [DOCUMENTAÇÃO](backEnd/README.md)
-
-
-## Problema Conhecido: Seleção Incorreta de Cidade com Nomes Iguais
-
-### Descrição do Problema
-Quando uma cidade brasileira possui o mesmo nome de uma cidade estrangeira, a API de Geolocalização retorna uma lista de cidades, o que pode resultar na seleção incorreta da cidade. Atualmente, o sistema utiliza uma função que busca a primeira cidade do Brasil, e se não encontrada, a cidade estrangeira é enviada, o que pode levar a resultados imprecisos.
-
-### Exemplo do Problema
-Por exemplo, ao procurar pela cidade "Alenquer," que existe tanto no Brasil quanto em Portugal, a seleção atual pode não garantir a escolha da cidade desejada.
-
-### Comportamento Atual
-O sistema atual prioriza a seleção da primeira cidade brasileira com o mesmo nome, o que pode levar a ambiguidades e resultados incorretos, especialmente em casos de homônimos internacionais.
 
 
 ## Ambiente de produção
